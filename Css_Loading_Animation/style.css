@@ -1,0 +1,85 @@
+body {
+    margin: 0;
+    font-family: Arial;
+    background: linear-gradient(135deg, #141e30, #243b55);
+    color: white;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    height: 100vh;
+}
+
+.container {
+    text-align: center;
+}
+
+/* Common Loader */
+.loader {
+    display: none;
+    margin: 20px auto;
+}
+
+/* Circle Loader */
+.circle {
+    width: 60px;
+    height: 60px;
+    border: 6px solid transparent;
+    border-top: 6px solid cyan;
+    border-right: 6px solid magenta;
+    border-radius: 50%;
+    animation: spin 1s linear infinite;
+}
+
+/* Dots Loader */
+.dots span {
+    width: 10px;
+    height: 10px;
+    background: white;
+    display: inline-block;
+    margin: 5px;
+    border-radius: 50%;
+    animation: bounce 0.6s infinite alternate;
+}
+.dots span:nth-child(2) { animation-delay: 0.2s; }
+.dots span:nth-child(3) { animation-delay: 0.4s; }
+
+/* Bars Loader */
+.bars span {
+    width: 6px;
+    height: 20px;
+    background: white;
+    display: inline-block;
+    margin: 3px;
+    animation: stretch 1s infinite;
+}
+.bars span:nth-child(2) { animation-delay: 0.2s; }
+.bars span:nth-child(3) { animation-delay: 0.4s; }
+
+/* Progress */
+.progress-box {
+    width: 250px;
+    height: 10px;
+    background: #555;
+    margin: 20px auto;
+    border-radius: 10px;
+}
+
+.progress-bar {
+    width: 0%;
+    height: 100%;
+    background: lime;
+    border-radius: 10px;
+}
+
+/* Animations */
+@keyframes spin {
+    100% { transform: rotate(360deg); }
+}
+
+@keyframes bounce {
+    100% { transform: translateY(-10px); }
+}
+
+@keyframes stretch {
+    50% { transform: scaleY(2); }
+}
