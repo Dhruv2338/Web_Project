@@ -1,0 +1,36 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Advanced Loaders</title>
+    <link rel="stylesheet" href="style.css">
+</head>
+<body>
+
+<div class="container">
+    <h1>Advanced Loaders</h1>
+
+    <!-- Loader Types -->
+    <div class="loader circle" id="circle"></div>
+
+    <div class="loader dots" id="dots">
+        <span></span><span></span><span></span>
+    </div>
+
+    <div class="loader bars" id="bars">
+        <span></span><span></span><span></span>
+    </div>
+
+    <!-- Progress -->
+    <div class="progress-box">
+        <div class="progress-bar" id="progressBar"></div>
+    </div>
+    <p id="progressText">0%</p>
+
+    <button onclick="startLoading()">Start Loading</button>
+</div>
+
+<script src="script.js"></script>
+</body>
+</html>
