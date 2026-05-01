@@ -1,0 +1,39 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Dhruv QR Generator</title>
+<link rel="stylesheet" href="style.css">
+</head>
+<body>
+
+<div class="container">
+
+    <h1>QR Code Generator</h1>
+
+    <!-- Only Dark Mode Toggle -->
+    <!-- <div class="top-controls">
+        <button onclick="toggleMode()">🌙</button>
+    </div> -->
+
+    <input type="text" id="qrText" placeholder="Enter text or URL">
+
+    <button onclick="generateQR()">Generate QR</button>
+    <button onclick="downloadQR()">Download</button>
+
+    <div id="qrContainer"></div>
+
+    <div class="history">
+        <h3>QR History</h3>
+        <ul id="historyList"></ul>
+    </div>
+
+    <p class="brand">Made by Dhruv 🚀</p>
+
+</div>
+
+<script src="https://cdnjs.cloudflare.com/ajax/libs/qrcodejs/1.0.0/qrcode.min.js"></script>
+<script src="script.js"></script>
+</body>
+</html>
