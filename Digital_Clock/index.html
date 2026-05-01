@@ -1,0 +1,307 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Created By Patel Dhruv ->> Digital Clock</title>
+  <style>
+    * { margin: 0; padding: 0; box-sizing: border-box; }
+
+    body {
+      background: #0a0a14;
+      min-height: 100vh;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      font-family: 'Segoe UI', sans-serif;
+    }
+
+    .wrap {
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      gap: 24px;
+      padding: 2rem;
+      width: 100%;
+      max-width: 580px;
+    }
+
+    .card {
+      background: #0f0f1e;
+      border: 1px solid #1e1e3a;
+      border-radius: 24px;
+      padding: 2.5rem 3.5rem;
+      text-align: center;
+      width: 100%;
+    }
+
+    .badge {
+      display: inline-flex;
+      align-items: center;
+      gap: 6px;
+      background: #12122a;
+      border: 1px solid #2a2a50;
+      border-radius: 20px;
+      padding: 5px 14px;
+      font-size: 11px;
+      letter-spacing: 2px;
+      color: #5555aa;
+      text-transform: uppercase;
+      margin-bottom: 1.8rem;
+    }
+
+    .dot-live {
+      width: 6px; height: 6px;
+      border-radius: 50%;
+      background: #00cc88;
+      animation: pulse 1.5s infinite;
+    }
+
+    @keyframes pulse {
+      0%, 100% { opacity: 1; }
+      50%       { opacity: 0.3; }
+    }
+
+    .time-row {
+      display: flex;
+      align-items: center;
+      justify-content: center;
+    }
+
+    .seg {
+      font-size: 88px;
+      font-weight: 700;
+      color: #e8eaff;
+      letter-spacing: -2px;
+      line-height: 1;
+      font-variant-numeric: tabular-nums;
+    }
+
+    .colon {
+      font-size: 72px;
+      font-weight: 300;
+      color: #3344aa;
+      padding: 0 6px;
+      animation: blink 1s step-end infinite;
+    }
+
+    @keyframes blink { 50% { opacity: 0; } }
+
+    .sec-wrap {
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      margin-left: 10px;
+      gap: 4px;
+    }
+
+    .sec-num {
+      font-size: 32px;
+      font-weight: 600;
+      color: #4466dd;
+      font-variant-numeric: tabular-nums;
+    }
+
+    .sec-lbl {
+      font-size: 10px;
+      letter-spacing: 2px;
+      color: #2a2a55;
+      text-transform: uppercase;
+    }
+
+    .ampm {
+      font-size: 16px;
+      font-weight: 500;
+      color: #3344aa;
+      letter-spacing: 2px;
+      margin-top: 8px;
+    }
+
+    .divider {
+      width: 100%;
+      height: 1px;
+      background: #12122a;
+      margin: 1.5rem 0;
+    }
+
+    .info-row {
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+    }
+
+    .info-block { text-align: center; flex: 1; }
+
+    .info-val {
+      font-size: 14px;
+      font-weight: 500;
+      color: #8899cc;
+      letter-spacing: 1px;
+    }
+
+    .info-lbl {
+      font-size: 10px;
+      letter-spacing: 2px;
+      color: #2a2a55;
+      text-transform: uppercase;
+      margin-top: 3px;
+    }
+
+    .sep { width: 1px; height: 36px; background: #1a1a35; }
+
+    .progress-wrap { width: 100%; }
+
+    .prog-lbl {
+      font-size: 11px;
+      letter-spacing: 2px;
+      color: #2a2a55;
+      text-transform: uppercase;
+      margin-bottom: 8px;
+    }
+
+    .prog-bar {
+      height: 3px;
+      background: #0f0f1e;
+      border-radius: 2px;
+      overflow: hidden;
+    }
+
+    .prog-fill {
+      height: 100%;
+      background: #3344aa;
+      border-radius: 2px;
+      transition: width 1s linear;
+    }
+
+    .theme-row { display: flex; gap: 10px; }
+
+    .theme-btn {
+      flex: 1;
+      padding: 8px;
+      background: #0f0f1e;
+      border: 1px solid #1e1e3a;
+      border-radius: 10px;
+      cursor: pointer;
+      font-size: 11px;
+      letter-spacing: 1px;
+      color: #4455aa;
+      text-transform: uppercase;
+      transition: all 0.2s;
+    }
+
+    .theme-btn:hover,
+    .theme-btn.active {
+      background: #12122a;
+      border-color: #3344aa;
+      color: #aabbff;
+    }
+
+    footer {
+      margin-top: 2rem;
+      text-align: center;
+      text-align: center;
+      color: #5555aa;
+    }
+  </style>
+</head>
+<body>
+
+<div class="wrap">
+  <div class="card">
+    <div class="badge"><span class="dot-live"></span> Live Clock</div>
+
+    <div class="time-row">
+      <span class="seg" id="hh">00</span>
+      <span class="colon">:</span>
+      <span class="seg" id="mm">00</span>
+      <div class="sec-wrap">
+        <span class="sec-num" id="ss">00</span>
+        <span class="sec-lbl">sec</span>
+      </div>
+    </div>
+
+    <div class="ampm" id="ampm">AM</div>
+    <div class="divider"></div>
+
+    <div class="info-row">
+      <div class="info-block">
+        <div class="info-val" id="dayname">---</div>
+        <div class="info-lbl">Day</div>
+      </div>
+      <div class="sep"></div>
+      <div class="info-block">
+        <div class="info-val" id="datestr">--</div>
+        <div class="info-lbl">Date</div>
+      </div>
+      <div class="sep"></div>
+      <div class="info-block">
+        <div class="info-val" id="monthstr">---</div>
+        <div class="info-lbl">Month</div>
+      </div>
+      <div class="sep"></div>
+      <div class="info-block">
+        <div class="info-val" id="yearstr">----</div>
+        <div class="info-lbl">Year</div>
+      </div>
+    </div>
+  </div>
+
+  <div class="progress-wrap">
+    <div class="prog-lbl">Day Progress</div>
+    <div class="prog-bar">
+      <div class="prog-fill" id="daybar" style="width:0%"></div>
+    </div>
+  </div>
+
+  <div class="theme-row" style="width:100%;">
+    <button class="theme-btn active" onclick="setColor('#3344aa','#4466dd','#e8eaff')">Blue</button>
+    <button class="theme-btn" onclick="setColor('#0f6e56','#1D9E75','#e1f5ee')">Teal</button>
+    <button class="theme-btn" onclick="setColor('#854F0B','#EF9F27','#faeeda')">Amber</button>
+    <button class="theme-btn" onclick="setColor('#993556','#D4537E','#fbeaf0')">Pink</button>
+  </div>
+</div>
+
+<script>
+  const days   = ['Sunday','Monday','Tuesday','Wednesday','Thursday','Friday','Saturday'];
+  const months = ['Jan','Feb','Mar','Apr','May','Jun','Jul','Aug','Sep','Oct','Nov','Dec'];
+
+  function pad(n) { return String(n).padStart(2, '0'); }
+
+  function tick() {
+    const n  = new Date();
+    let h    = n.getHours(), m = n.getMinutes(), s = n.getSeconds();
+    const ap = h >= 12 ? 'PM' : 'AM';
+    const h12 = h % 12 || 12;
+
+    document.getElementById('hh').textContent      = pad(h12);
+    document.getElementById('mm').textContent      = pad(m);
+    document.getElementById('ss').textContent      = pad(s);
+    document.getElementById('ampm').textContent    = ap;
+    document.getElementById('dayname').textContent = days[n.getDay()].slice(0,3).toUpperCase();
+    document.getElementById('datestr').textContent = pad(n.getDate());
+    document.getElementById('monthstr').textContent= months[n.getMonth()];
+    document.getElementById('yearstr').textContent = n.getFullYear();
+
+    const pct = ((h * 3600 + m * 60 + s) / 86400 * 100).toFixed(2);
+    document.getElementById('daybar').style.width = pct + '%';
+  }
+
+  function setColor(border, sec, text) {
+    document.querySelectorAll('.theme-btn').forEach(b => b.classList.remove('active'));
+    event.target.classList.add('active');
+    document.querySelectorAll('.colon, .ampm, .sec-lbl').forEach(el => el.style.color = border);
+    document.querySelectorAll('.prog-fill').forEach(el => el.style.background = border);
+    document.querySelectorAll('.sec-num').forEach(el => el.style.color = sec);
+    document.querySelectorAll('.seg').forEach(el => el.style.color = text);
+  }
+
+  tick();
+  setInterval(tick, 1000);
+</script>
+
+<footer>
+  <p class="f">&copy; 2026 Digital Clock. All rights reserved.</p>
+  <p class="f">Made By Dhruv</p>
+</footer>
+</body>
+</html>
